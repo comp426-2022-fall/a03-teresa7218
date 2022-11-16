@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 import {roll} from "../lib/roll.js"
-import minimist from 'minimist';
+import parseArgs from 'minimist';
 
-const args = minimist(process.argv.slice(2));
+var argv = parseArgs(process.argv);
+var r = roll(argv.sides, argv.dice, argv.rolls);
 
-let result = JSON.stringify(roll(args.sides, args.dice, args.rolls));
-console.log(result);
+const obj = {sides: argv.sides, dice: argv.dice, rolls: argv.rolls, results: r};
+console.log(JSON.stringify(obj));
+
